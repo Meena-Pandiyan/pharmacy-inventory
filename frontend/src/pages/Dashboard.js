@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, Legend,
+  ResponsiveContainer,
 } from "recharts";
 import { getMedicines, getReports, getSales } from "../api";
 
@@ -74,7 +74,6 @@ export default function Dashboard() {
 
   const today = new Date();
   const lowStockList  = medicines.filter((m) => m.quantity < (m.reorderLevel ?? 25) && m.quantity > 0);
-  const expiredList   = medicines.filter((m) => new Date(m.expiryDate) < today);
   const expiringSoon  = medicines.filter((m) => {
     const d = Math.ceil((new Date(m.expiryDate) - today) / 86400000);
     return d >= 0 && d <= 30;

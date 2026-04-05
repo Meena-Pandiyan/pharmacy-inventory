@@ -87,12 +87,13 @@ export default function PurchaseOrders() {
       setSuppliers(Array.isArray(supRes.data) ? supRes.data : []);
       setMedicines(Array.isArray(medRes.data) ? medRes.data : []);
     } catch (err) {
-      flash("Failed to load data", "error");
+      console.error("Failed to load data", err);
     } finally {
       setLoading(false);
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(); }, []);
 
   // ── Derived data ──────────────────────────────────────────
