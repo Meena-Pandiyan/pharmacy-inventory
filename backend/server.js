@@ -23,10 +23,15 @@ app.use("/api/sales", require("./routes/sales"));
 app.use("/api/suppliers", require("./routes/suppliers"));
 app.use("/api/purchase-orders", require("./routes/purchaseOrders"));
 
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: "Internal server error" });
+  res.status(err.status || 500).json({ error: err.message || "Internal server error" });
 });
 
 const PORT = process.env.PORT || 5000;
