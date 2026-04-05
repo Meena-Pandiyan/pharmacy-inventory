@@ -11,6 +11,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Health check
+app.get("/", (req, res) => res.json({ status: "PharmaCare API running" }));
+
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/medicines", require("./routes/medicines"));
